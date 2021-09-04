@@ -168,7 +168,7 @@ function library:Window(title)
             local UICorner_4 = Instance.new("UICorner")
             
             SilderContainer.Name = "SilderContainer"
-            SilderContainer.Parent = game.StarterGui.Window.Container.Frame.Sections
+            SilderContainer.Parent = Section
             SilderContainer.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
             SilderContainer.Position = UDim2.new(-0.000422947109, 0, 1.16666663, 0)
             SilderContainer.Size = UDim2.new(0, 417, 0, 34)
