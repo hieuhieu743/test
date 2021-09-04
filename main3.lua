@@ -20,7 +20,7 @@ function UpdateSizeSection()
 
 end
 
-function library:Window(title)
+function library:Window(gameName)
 	local window = {}
 	title = title or "Window"
 	
@@ -58,7 +58,7 @@ function library:Window(title)
 	TextLabel.Size = UDim2.new(0, 318, 0, 24)
 	TextLabel.Font = Enum.Font.SourceSansBold
 	TextLabel.LineHeight = 1.150
-	TextLabel.Text = "CFA Hub Premium - "..title
+	TextLabel.Text = "CFA Hub Premium - "..gameName
 	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 	TextLabel.TextScaled = true
 	TextLabel.TextSize = 14.000
@@ -154,8 +154,6 @@ function library:Window(title)
             max = max or 100
             callback = callback or function() end
             local Value
-            local releaseconnection
-            local moveconnection
             
             local SilderContainer = Instance.new("Frame")
             local UICorner_2 = Instance.new("UICorner")
@@ -244,7 +242,7 @@ function library:Window(title)
                     Value = math.floor((((tonumber(max) - tonumber(min)) / 217) * Bar.AbsoluteSize.X) + tonumber(min))
                     pcall(function()
                         callback(Value)
-                        TextLabel.Text = Value
+                        Number.Text = Value
                     end)
                     Bar.Size = UDim2.new(0, math.clamp(mouse.X - Bar.AbsolutePosition.X, 0, 217), 0, 9)
                 end)
