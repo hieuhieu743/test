@@ -9,6 +9,8 @@ local TweenService = game:GetService("TweenService")
 
 local LocalPlayer = Players.LocalPlayer
 local UserId = LocalPlayer.UserId
+local mouse = game.Players.LocalPlayer:GetMouse()
+local uis = game:GetService("UserInputService")
 
 function UpdateSizeTab()
 
@@ -151,30 +153,34 @@ function library:Window(title)
             min = min or 1
             max = max or 100
             callback = callback or function() end
+            local Value
+            local releaseconnection
+            local moveconnection
             
             local SilderContainer = Instance.new("Frame")
             local UICorner_2 = Instance.new("UICorner")
             local Name = Instance.new("TextLabel")
-            local BarFrame = Instance.new("Frame")
+            local Icon = Instance.new("ImageLabel")
+            local Number = Instance.new("TextLabel")
+            local SilderButton = Instance.new("TextButton")
             local Bar = Instance.new("Frame")
             local UICorner_3 = Instance.new("UICorner")
             local UICorner_4 = Instance.new("UICorner")
-            local Icon = Instance.new("ImageLabel")
             
             SilderContainer.Name = "SilderContainer"
-            SilderContainer.Parent = Section
+            SilderContainer.Parent = game.StarterGui.Window.Container.Frame.Sections
             SilderContainer.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
             SilderContainer.Position = UDim2.new(-0.000422947109, 0, 1.16666663, 0)
             SilderContainer.Size = UDim2.new(0, 417, 0, 34)
-    
+            
             UICorner_2.Parent = SilderContainer
-    
+            
             Name.Name = "Name"
             Name.Parent = SilderContainer
             Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Name.BackgroundTransparency = 1.000
             Name.Position = UDim2.new(0.12230216, 0, 0, 0)
-            Name.Size = UDim2.new(0, 137, 0, 34)
+            Name.Size = UDim2.new(0, 96, 0, 34)
             Name.Font = Enum.Font.SourceSansBold
             Name.LineHeight = 1.130
             Name.Text = text
@@ -183,23 +189,7 @@ function library:Window(title)
             Name.TextSize = 14.000
             Name.TextWrapped = true
             Name.TextXAlignment = Enum.TextXAlignment.Left
-    
-            BarFrame.Name = "BarFrame"
-            BarFrame.Parent = SilderContainer
-            BarFrame.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
-            BarFrame.Position = UDim2.new(0.450839341, 0, 0.34343943, 0)
-            BarFrame.Size = UDim2.new(0, 219, 0, 9)
-    
-            Bar.Name = "Bar"
-            Bar.Parent = BarFrame
-            Bar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Bar.Position = UDim2.new(0.00684945425, 0, 0.00710381381, 0)
-            Bar.Size = UDim2.new(0, 172, 0, 9)
-    
-            UICorner_3.Parent = Bar
-    
-            UICorner_4.Parent = BarFrame
-    
+            
             Icon.Name = "Icon"
             Icon.Parent = SilderContainer
             Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -207,6 +197,69 @@ function library:Window(title)
             Icon.Position = UDim2.new(0.0263788961, 0, -0.0294117648, 0)
             Icon.Size = UDim2.new(0, 34, 0, 34)
             Icon.Image = "http://www.roblox.com/asset/?id=7399449796"
+            
+            Number.Name = "Number"
+            Number.Parent = SilderContainer
+            Number.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Number.BackgroundTransparency = 1.000
+            Number.Position = UDim2.new(0.352517992, 0, 0, 0)
+            Number.Size = UDim2.new(0, 41, 0, 34)
+            Number.Font = Enum.Font.SourceSansBold
+            Number.LineHeight = 1.130
+            Number.Text = "0"
+            Number.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Number.TextScaled = true
+            Number.TextSize = 14.000
+            Number.TextWrapped = true
+            
+            SilderButton.Name = "SilderButton"
+            SilderButton.Parent = SilderContainer
+            SilderButton.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+            SilderButton.Position = UDim2.new(0.455635488, 0, 0.323529422, 0)
+            SilderButton.Size = UDim2.new(0, 217, 0, 9)
+            SilderButton.AutoButtonColor = false
+            SilderButton.Font = Enum.Font.SourceSans
+            SilderButton.Text = ""
+            SilderButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+            SilderButton.TextSize = 14.000
+            
+            Bar.Name = "Bar"
+            Bar.Parent = SilderButton
+            Bar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Bar.Position = UDim2.new(-0.00921658985, 0, 0.00710381381, 0)
+            Bar.Size = UDim2.new(0.00899999961, 0, 0, 9)
+            
+            UICorner_3.Parent = Bar
+            
+            UICorner_4.Parent = SilderButton
+
+            SilderButton.MouseButton1Down:Connect(function()
+                Value = math.floor((((tonumber(max) - tonumber(min)) / 217) * Bar.AbsoluteSize.X) + tonumber(min)) or 0
+                pcall(function()
+                    callback(Value)
+                end)
+                Bar.Size = UDim2.new(0, math.clamp(mouse.X - Bar.AbsolutePosition.X, 0, 217), 0, 9)
+                moveconnection = mouse.Move:Connect(function()
+                    Number.Text = Value
+                    Value = math.floor((((tonumber(max) - tonumber(min)) / 217) * Bar.AbsoluteSize.X) + tonumber(min))
+                    pcall(function()
+                        callback(Value)
+                        TextLabel.Text = Value
+                    end)
+                    Bar.Size = UDim2.new(0, math.clamp(mouse.X - Bar.AbsolutePosition.X, 0, 217), 0, 9)
+                end)
+                releaseconnection = uis.InputEnded:Connect(function(Mouse)
+                    if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+                        Value = math.floor((((tonumber(max) - tonumber(min)) / 217) * Bar.AbsoluteSize.X) + tonumber(min))
+                        pcall(function()
+                            callback(Value)
+                        end)
+                        Bar.Size = UDim2.new(0, math.clamp(mouse.X - Bar.AbsolutePosition.X, 0, 217), 0, 9)
+                        moveconnection:Disconnect()
+                        releaseconnection:Disconnect()
+                    end
+                end)
+            end)
         end
     
         function sections:MakeButton(text, callback)
@@ -306,7 +359,7 @@ function library:Window(title)
             Name_3.Size = UDim2.new(0, 137, 0, 34)
             Name_3.Font = Enum.Font.SourceSansBold
             Name_3.LineHeight = 1.130
-            Name_3.Text = "Toggle"
+            Name_3.Text = text
             Name_3.TextColor3 = Color3.fromRGB(255, 255, 255)
             Name_3.TextScaled = true
             Name_3.TextSize = 14.000
