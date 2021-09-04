@@ -32,6 +32,14 @@ function library:Window(gameName)
 	local ImageButton = Instance.new("ImageButton")
 	local Tabs = Instance.new("ScrollingFrame")
 	local UIListLayout = Instance.new("UIListLayout")
+
+    local function updateSizeTab()
+        local cs = UIListLayout.AbsoluteContentSize
+
+        game:GetService("TweenService"):Create(Tabs, TweenInfo(0.3, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear), {
+            CanvasSize = UDim2.new(0,0,0,cs.Y)
+        })
+    end
 	
 	CFAUiLib.Name = "Window"
 	CFAUiLib.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -87,6 +95,8 @@ function library:Window(gameName)
 	Tabs.Size = UDim2.new(0, 131, 0, 284)
 	Tabs.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y)
 	Tabs.ScrollBarThickness = 6
+
+    updateSizeTab()
 	
 	UIListLayout.Parent = Tabs
 	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -137,6 +147,14 @@ function library:Window(gameName)
         local Section = Instance.new("ScrollingFrame")
         local UIListLayout_2 = Instance.new("UIListLayout")
 
+        local function updateSize()
+            local cs = UIListLayout_2.AbsoluteContentSize
+    
+            game:GetService("TweenService"):Create(Section, TweenInfo(0.3, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear), {
+                CanvasSize = UDim2.new(0,0,0,cs.Y)
+            })
+        end
+
         Section.Name = "Section"
         Section.Parent = Container
         Section.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -144,8 +162,10 @@ function library:Window(gameName)
         Section.BorderSizePixel = 0
         Section.Position = UDim2.new(0.2249538, 0, 0.097942017, 0)
         Section.Size = UDim2.new(0, 449, 0, 277)
-        Section.CanvasSize = UDim2.new(0,0,0,UIListLayout_2.AbsoluteContentSize.Y)
+        Section.CanvasSize = UDim2.new(0,0,0,0)
         Section.ScrollBarThickness = 6
+
+        updateSize()
 
         UIListLayout_2.Parent = Section
         UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
