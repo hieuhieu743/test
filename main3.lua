@@ -22,7 +22,7 @@ end
 
 function library:Window(gameName)
 	local window = {}
-	title = title or "Window"
+	gameName = gameName or "Window"
 	
 	local CFAUiLib = Instance.new("ScreenGui")
 	local Container = Instance.new("Frame")
@@ -154,6 +154,8 @@ function library:Window(gameName)
             max = max or 100
             callback = callback or function() end
             local Value
+            local moveconnection
+            local releaseconnection
             
             local SilderContainer = Instance.new("Frame")
             local UICorner_2 = Instance.new("UICorner")
