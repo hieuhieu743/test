@@ -78,7 +78,6 @@ function library:Window(gameName)
         wait()
         game.TweenService:Create(Container, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
 			Size = UDim2.new(0,0,0,0),
-			Position = UDim2.new(0, Container.AbsolutePosition.X + (Container.AbsoluteSize.X / 2), 0, Container.AbsolutePosition.Y + (Container.AbsoluteSize.Y / 2))
 		}):Play()
         wait(1)
         CFAUiLib:Destroy()
