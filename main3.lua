@@ -77,16 +77,12 @@ function library:Window(gameName)
 	Tabs.BorderSizePixel = 0
 	Tabs.Position = UDim2.new(0, 0, 0.0776699036, 0)
 	Tabs.Size = UDim2.new(0, 131, 0, 284)
+	Tabs.CanvasSize = UDim2.new(0, UIListLayout.AbsoluteContentSize.X, 0, UIListLayout.AbsoluteContentSize.Y)
 	Tabs.ScrollBarThickness = 6
 	
 	UIListLayout.Parent = Tabs
 	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	UIListLayout.Padding = UDim.new(0, 2)
-
-    Tabs.ChildAdded:Connect(function()
-		local ab = UIListLayout.AbsoluteContentSize
-		Tabs.CanvasSize = UDim2.new(0,0,0,ab.Y)
-	end)
 
 	function window:Destroy()
 		LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("Window"):Destroy()
@@ -136,17 +132,13 @@ function library:Window(gameName)
             Section.BackgroundTransparency = 1.000
             Section.BorderSizePixel = 0
             Section.Position = UDim2.new(0.2249538, 0, 0.097942017, 0)
+            Section.Size = UDim2.new(0, UIListLayout_2.AbsoluteContentSize.X, 0, UIListLayout_2.AbsoluteContentSize.Y)
             Section.ScrollBarThickness = 6
     
             UIListLayout_2.Parent = Section
             UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
             UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
             UIListLayout_2.Padding = UDim.new(0, 4)
-
-            Section.ChildAdded:Connect(function()
-                local ab = UIListLayout_2.AbsoluteContentSize
-                Section.CanvasSize = UDim2.new(0,0,0,ab.Y)
-            end)
     
             function sections:MakeSilder(text, min, max, callback)
                 text = text or "Silder"
