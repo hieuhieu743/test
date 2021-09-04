@@ -118,10 +118,10 @@ function library:Window(title)
         local toggled = false
         if toggled then
             toggled = false
-            Container:TweenSize(UDim2.new(0, 0, 0, 24), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.3)
+            Container:TweenSize(UDim2.new(0, 580, 0, 309), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.3)
         else
             toggled = true
-            Container:TweenSize(UDim2.new(0, 0, 0, 309), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.3)
+            Container:TweenSize(UDim2.new(0, 580, 0, 24), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.3)
         end
     end)
 
