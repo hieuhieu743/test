@@ -69,7 +69,20 @@ function library:Window(gameName)
 	ImageButton.BackgroundTransparency = 1.000
 	ImageButton.Position = UDim2.new(0.925999999, 0, 0, 0)
 	ImageButton.Size = UDim2.new(0, 24, 0, 24)
-	ImageButton.Image = "rbxassetid://6035067836"
+	ImageButton.Image = "rbxassetid://3926305904"
+
+    ImageButton.MouseButton1Click:Connect(function()
+        game.TweenService:Create(ImageButton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            ImageTransparency = 1
+        }):Play()
+        wait()
+        game.TweenService:Create(Container, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0,0,0,0),
+			Position = UDim2.new(0, Container.AbsolutePosition.X + (Container.AbsoluteSize.X / 2), 0, Container.AbsolutePosition.Y + (Container.AbsoluteSize.Y / 2))
+		}):Play()
+        wait(1)
+        CFAUiLib:Destroy()
+    end)
 	
 	Tabs.Name = "Tabs"
 	Tabs.Parent = Container
