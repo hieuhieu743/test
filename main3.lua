@@ -12,14 +12,6 @@ local UserId = LocalPlayer.UserId
 local mouse = game.Players.LocalPlayer:GetMouse()
 local uis = game:GetService("UserInputService")
 
-function UpdateSizeTab()
-
-end
-
-function UpdateSizeSection()
-
-end
-
 function library:Window(gameName)
 	local window = {}
 	gameName = gameName or "Window"
