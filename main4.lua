@@ -109,7 +109,7 @@ function library:NewWindow(title)
     Tabs.Position = UDim2.new(0, 0, 0.0776699036, 0)
     Tabs.Size = UDim2.new(0, 131, 0, 284)
     Tabs.CanvasSize = UDim2.new(0, 0, 0, 0)
-    Tabs.ScrollBarThickness = 6
+    Tabs.ScrollBarThickness = 4
 
     UIListLayout.Parent = Tabs
     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -177,8 +177,8 @@ function library:NewWindow(title)
             local c = ButtonSample:Clone()
             c.ImageTransparency = 0.600
             c.Parent = Page_Button
-            local x,y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-            c.Position = UDim2.new(0,x,0,y)
+            local y = (ms.Y - c.AbsolutePosition.Y)
+            c.Position = UDim2.new(0,0,0,y)
             local len, size = 0.35, nil
             if Page_Button.AbsoluteSize.X >= Page_Button.AbsoluteSize.Y then
                 size = (Page_Button.AbsoluteSize.X * 1.5)
