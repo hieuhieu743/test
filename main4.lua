@@ -115,6 +115,11 @@ function library:NewWindow(title)
     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIListLayout.Padding = UDim.new(0, 2)
 
+    local Containers = Instance.new("Folder")
+
+    Containers.Name = "Containers"
+    Containers.Parent = Background
+
     function window:NewTab(name)
         local tabs = {}
         name = name or "Tab"
@@ -126,14 +131,14 @@ function library:NewWindow(title)
 
         UpdateSize()
 
-        TABContainer.Name = "TABContainer"
+        TABContainer.Name = name.."Container"
         TABContainer.Parent = Tabs
         TABContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         TABContainer.BackgroundTransparency = 1.000
         TABContainer.Position = UDim2.new(0, 0, 0.0237180144, 0)
         TABContainer.Size = UDim2.new(0, 131, 0, 41)
         
-        Page_Button.Name = "Page_Button"
+        Page_Button.Name = name.."_Button"
         Page_Button.Parent = TABContainer
         Page_Button.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
         Page_Button.BorderColor3 = Color3.fromRGB(31, 31, 31)
@@ -159,18 +164,14 @@ function library:NewWindow(title)
         ButtonSample.Image = "rbxassetid://4560909609"
         ButtonSample.ImageTransparency = 1.000
 
-        local Containers = Instance.new("Folder")
         local Container = Instance.new("Frame")
 
-        Container.Name = "Container"
+        Container.Name = name.."Container"
         Container.Parent = Containers
         Container.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Container.BackgroundTransparency = 1.000
         Container.Position = UDim2.new(0.225862071, 0, 0.0776699036, 0)
         Container.Size = UDim2.new(0, 449, 0, 284)
-
-        Containers.Name = "Containers"
-        Containers.Parent = Background
 
         Page_Button.MouseButton1Click:Connect(function()
             UpdateSize()
@@ -181,8 +182,6 @@ function library:NewWindow(title)
             c.Position = UDim2.new(0,0,0,y)
             local len, size = 0.35, nil
             if Page_Button.AbsoluteSize.X >= Page_Button.AbsoluteSize.Y then
-                size = (Page_Button.AbsoluteSize.X * 1.5)
-            else
                 size = (Page_Button.AbsoluteSize.Y * 1.5)
             end
             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2), 'Out', 'Quad', len, true, nil))
@@ -196,7 +195,6 @@ function library:NewWindow(title)
                 v.Visible = false
             end
             Container.Visible = true
-            print(Container.Name.." parent is "..name)
         end)
 
         function tabs:NewSection(name)
