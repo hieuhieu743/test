@@ -44,7 +44,7 @@ function library:NewWindow(title)
         local cS = UIListLayout.AbsoluteContentSize
 
         game.TweenService:Create(Tabs, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-            CanvasSize = UDim2.new(0,cS.X,0,cS.Y)
+            CanvasSize = UDim2.new(0,0,0,cS.Y)
         }):Play()
     end
 
@@ -178,10 +178,12 @@ function library:NewWindow(title)
             local c = ButtonSample:Clone()
             c.ImageTransparency = 0.600
             c.Parent = Page_Button
-            local y = (ms.Y - c.AbsolutePosition.Y)
-            c.Position = UDim2.new(0,0,0,y)
+            local x,y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
+            c.Position = UDim2.new(0,x,0,y)
             local len, size = 0.35, nil
             if Page_Button.AbsoluteSize.X >= Page_Button.AbsoluteSize.Y then
+                size = (Page_Button.AbsoluteSize.X * 1.5)
+            else
                 size = (Page_Button.AbsoluteSize.Y * 1.5)
             end
             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2), 'Out', 'Quad', len, true, nil))
