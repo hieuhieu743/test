@@ -225,7 +225,7 @@ function library:NewWindow(title)
             local SecUI = Instance.new("UICorner")
 
             SectionFrame.Name = "SectionFrame"
-            SectionFrame.Parent = game.StarterGui.CFAUiLib.Background.Container.Sections
+            SectionFrame.Parent = Sections
             SectionFrame.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
             SectionFrame.Position = UDim2.new(0.0244988855, 0, 0.548736453, 0)
             SectionFrame.Size = UDim2.new(0, 427, 0, 45)
