@@ -44,11 +44,12 @@ function library:NewWindow(title)
         local cS = UIListLayout.AbsoluteContentSize
 
         game.TweenService:Create(Tabs, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-            CanvasSize = UDim2.new(0,0,0,cS.Y)
+            CanvasSize = UDim2.new(0,131,0,cS.Y)
         }):Play()
     end
 
-    UpdateSize()
+    Tabs.ChildAdded:Connect(UpdateSize())
+    Tabs.ChildRemoved:Connect(UpdateSize())
 
     CFAUiLib.Name = "CFAUiLib"
     CFAUiLib.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -98,8 +99,7 @@ function library:NewWindow(title)
     ImageButton.Image = "http://www.roblox.com/asset/?id=7409394566"
     ImageButton.MouseButton1Click:Connect(function()
         CFAUiLib:Destroy()
-        --player:WaitForChild("PlayerGui"):WaitForChild("CFAUiLib"):Destroy()
-        --coreGui:WaitForChild("CFAUiLib"):Destroy()
+        UpdateSize()
     end)
     
     Tabs.Name = "Tabs"
@@ -120,16 +120,18 @@ function library:NewWindow(title)
     Containers.Name = "Containers"
     Containers.Parent = Background
 
+    UpdateSize()
+
     function window:NewTab(name)
         local tabs = {}
         name = name or "Tab"
+
+        UpdateSize()
 
         local TABContainer = Instance.new("Frame")
         local Page_Button = Instance.new("TextButton")
         local UICorner = Instance.new("UICorner")
         local ButtonSample = Instance.new("ImageLabel")
-
-        UpdateSize()
 
         TABContainer.Name = name.."Container"
         TABContainer.Parent = Tabs
@@ -206,6 +208,16 @@ function library:NewWindow(title)
             local Sections = Instance.new("ScrollingFrame")
             local UIListLayout_2 = Instance.new("UIListLayout")
 
+            local function UpdateSectionSize()
+                local ab = UIListLayout_2.AbsoluteContentSize
+
+                game.TweenService:Create(Sections, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                    CanvasSize = UDim2.new(0,449,0,ab.Y)
+                }):Play()
+            end
+
+            UpdateSectionSize()
+
             Sections.Name = "Sections"
             Sections.Parent = Container
             Sections.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -247,6 +259,8 @@ function library:NewWindow(title)
             SecUI.Parent = SectionFrame
 
             function sections:NewSilder(text, min, max, callback)
+                UpdateSectionSize()
+                
                 text = text or "Silder"
                 min = min or 1
                 max = max or 100
@@ -331,6 +345,8 @@ function library:NewWindow(title)
             end
             
             function sections:NewButton(text, callback)
+                UpdateSectionSize()
+
                 text = text or "Button"
                 callback = callback or function() end
 
@@ -397,6 +413,8 @@ function library:NewWindow(title)
             end
 
             function sections:NewToggle(text, callback)
+                UpdateSectionSize()
+
                 text = text or "Toggle"
                 callback = callback or function() end
 
@@ -472,6 +490,8 @@ function library:NewWindow(title)
             end
 
             function sections:NewDropdown(text)
+                UpdateSectionSize()
+
                 local options = {}
                 text = text or "Dropdown"
                 
