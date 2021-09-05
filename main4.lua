@@ -157,7 +157,7 @@ function library:NewWindow(title)
         ButtonSample.Position = UDim2.new(0.0128205121, 0, 0.327840537, 0)
         ButtonSample.Size = UDim2.new(0, 50, 0, 50)
         ButtonSample.Image = "rbxassetid://4560909609"
-        ButtonSample.ImageTransparency = 0.600
+        ButtonSample.ImageTransparency = 1.000
 
         local Containers = Instance.new("Folder")
         local Container = Instance.new("Frame")
@@ -175,6 +175,7 @@ function library:NewWindow(title)
         Page_Button.MouseButton1Click:Connect(function()
             UpdateSize()
             local c = ButtonSample:Clone()
+            c.ImageTransparency = 0.600
             c.Parent = Page_Button
             local x,y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
             c.Position = UDim2.new(0,x,0,y)
