@@ -44,7 +44,7 @@ function library:NewWindow(title)
         local cS = UIListLayout.AbsoluteContentSize
 
         game.TweenService:Create(Tabs, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-            CanvasSize = UDim2.new(0,131,0,cS.Y)
+            CanvasSize = UDim2.new(0,0,0,cS.Y)
         }):Play()
     end
 
@@ -212,7 +212,7 @@ function library:NewWindow(title)
                 local ab = UIListLayout_2.AbsoluteContentSize
 
                 game.TweenService:Create(Sections, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    CanvasSize = UDim2.new(0,449,0,ab.Y)
+                    CanvasSize = UDim2.new(0,0,0,ab.Y)
                 }):Play()
             end
 
